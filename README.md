@@ -31,8 +31,9 @@ $ ./lamport
 # TODO:
 - [ ] Test on multiple platforms - (Currently I'm only testing windows. It should work fine on linux. I'm only worried about fileutils really)
 - [ ] Some useful examples
-- [ ] Separating Lamport this out to its own library maybe?
+- [ ] Separating Lamport out to its own library maybe?
 - [ ] Test on x86 - (I haven't tested it. Given its C it should work fine. Don't know for sure though) = Probably slow for uint64 - fix that
+
 # Purpose
 This project was mostly made because of curioucity and the fact I wanted to just check out how this algorithmn worked.
 I highly recommend you try and implement this yourself or build on top of what is already here. Its fairly straightforward
@@ -40,6 +41,7 @@ and pretty simple to use too!
 To give you some ideas for what it can be used for:
 - Simple login system (A random access token generated and a sign with the username of the user. Every time they try to login they must provide the access token)
 - Chat System (A simple verification for if a specific user sent that message or not)
+
 Be creative and play around with it. If there's any Issues you can add them to this github page 
 
 However, I'm not going to be accepting any Pull requests (except those who just want to fix an important bug in the code),
