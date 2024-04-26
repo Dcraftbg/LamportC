@@ -1,0 +1,10 @@
+**.bin
+**.key
+Lamport/lorem.txt
+Lamport/src/ideas.h
+**.vcxproj
+**.vcxproj.user
+**.vcxproj.filters
+**.sln
+.vs/
+out/
