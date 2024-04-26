@@ -235,45 +235,6 @@ int decode_base64(char* code, size_t len, uint8_t* res, size_t res_cap) {
     // Swapping the bytes in a 24 bit integer^
     memcpy(res, &v, res_cap > 3 ? 3 : res_cap);
     return 0;
-#if 0
-    size_t resto = res_cap % 3;
-    size_t res_cap_round = (res_cap + 2) / 3;
-    size_t clen = 0;
-    char* chunk = NULL;
-    int ccv = 0;
-    char tmp = 0;
-    // Trim the '=' sign on the right and assert its equal to resto
-    while (len > 0 && code[len] == '=' && 3 - resto) { len--; resto++; }
-    if(3-resto != 3) 
-        return EDEC_INVALID_PADDING;
-    clen = len / 4;
-    if (clen > res_cap_round) return EDEC_NOT_ENOUGH_MEM;
-    for (size_t i = 0; i < clen; ++i, res += 3) {
-        chunk = (char*)((uint32_t*)code + i);
-        uint32_t v=0;
-        for (size_t j = 0; j < 4; ++j) {
-            if (i+1 == clen && j > resto) {
-                if (chunk[j] != '=') 
-                    return EDEC_INVALID_DIGIT;
-                continue;
-            }
-            else if (chunk[j] == '=') {
-                __debugbreak();
-                return EDEC_INVALID_DIGIT;
-            }
-            ccv = decode_base64_char(chunk[j]);
-            if (ccv < 0) 
-                return EDEC_INVALID_DIGIT;
-            v = (v << 6) | ccv;
-            // v = (v >> 6) | (ccv << 14);
-        }
-        tmp = ((char*)&v)[2];
-        ((char*)&v)[2] = ((char*)&v)[0];
-        ((char*)&v)[0] = tmp;
-        memcpy(res, ((char*)&v), 3);
-    }
-    return 0;
-#endif
 }
 #include <Windows.h>
 static int test_base64_tf(void) {
