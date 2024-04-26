@@ -434,13 +434,17 @@ int main(void) {
     if (!file_exists(kp)) {
         Key* k = key_gen_private();
         key = Key_make_public(k);
-        key_dump_file(kp, key); // Simple cashing for the key
         key_drop(k);
+        if (!key_dump_file(kp, key)) { // Simple caching for the key
+            fprintf(stderr, "[ERROR] Failed to generate %s\n", kp);
+            return 1;
+        }
+        printf("[INFO] Generated %s (cached)\n", kp);
     }
     else {
         key = key_load(kp);
         if (!key) {
-            fprintf(stderr, "[ERROR] Failed to load public key!\n");
+            fprintf(stderr, "[ERROR] Failed to load public key %s!\n",kp);
             return 1;
         }
     }
